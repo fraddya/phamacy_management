@@ -1,5 +1,6 @@
 package com.raven.component;
 
+import com.raven.billform.TotalPrice;
 import com.raven.event.EventMenu;
 import com.raven.swing.ButtonMenu;
 import com.raven.swing.scrollbar.ScrollBarCustom;
@@ -27,16 +28,28 @@ public class Menu extends javax.swing.JPanel {
 
     public void initMenu(EventMenu event) {
         this.event = event;
+        if(TotalPrice.utype.equals("admin")){
         addMenu(new ImageIcon(getClass().getResource("/com/raven/icon/1.png")), "Dashboard", 0);
-        addMenu(new ImageIcon(getClass().getResource("/com/raven/icon/2.png")), "Application", 1);
-        addMenu(new ImageIcon(getClass().getResource("/com/raven/icon/3.png")), "Staff", 2);
-        addMenu(new ImageIcon(getClass().getResource("/com/raven/icon/4.png")), "Report", 3);
-        addMenu(new ImageIcon(getClass().getResource("/com/raven/icon/5.png")), "Note", 4);
-        addMenu(new ImageIcon(getClass().getResource("/com/raven/icon/6.png")), "Export", 5);
-        addMenu(new ImageIcon(getClass().getResource("/com/raven/icon/7.png")), "Import", 6);
-        addMenu(new ImageIcon(getClass().getResource("/com/raven/icon/8.png")), "Setting", 7);
+        addMenu(new ImageIcon(getClass().getResource("/com/raven/icon/2.png")), "Billing", 1);
+        addMenu(new ImageIcon(getClass().getResource("/com/raven/icon/3.png")), "Billing History", 2);
+        addMenu(new ImageIcon(getClass().getResource("/com/raven/icon/4.png")), "Manage Medicine", 3);
+        addMenu(new ImageIcon(getClass().getResource("/com/raven/icon/5.png")), "Manage Manufacturer", 4);
+        addMenu(new ImageIcon(getClass().getResource("/com/raven/icon/6.png")), "Manage Employer", 5);
+        addMenu(new ImageIcon(getClass().getResource("/com/raven/icon/7.png")), "Add Users", 6);
+        //addMenu(new ImageIcon(getClass().getResource("/com/raven/icon/8.png")), "Setting", 7);
         addEmpty();
-        addMenu(new ImageIcon(getClass().getResource("/com/raven/icon/logout.png")), "Logout", 8);
+        //addMenu(new ImageIcon(getClass().getResource("/com/raven/icon/logout.png")), "Logout", 8);
+        jLabel1.setText(TotalPrice.name);
+        jLabel2.setText("Admin");
+        }
+        else if(TotalPrice.utype.equals("user")){
+        addMenu(new ImageIcon(getClass().getResource("/com/raven/icon/2.png")), "Billing", 1);
+        addMenu(new ImageIcon(getClass().getResource("/com/raven/icon/3.png")), "Billing History", 2);
+        addEmpty();
+        //addMenu(new ImageIcon(getClass().getResource("/com/raven/icon/logout.png")), "Logout", 8);
+        jLabel1.setText(TotalPrice.name);
+        jLabel2.setText("User");
+        }
     }
 
     private void addEmpty() {
@@ -83,7 +96,7 @@ public class Menu extends javax.swing.JPanel {
 
         imageAvatar1.setForeground(new java.awt.Color(231, 231, 231));
         imageAvatar1.setBorderSize(2);
-        imageAvatar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/raven/icon/profile.jpg"))); // NOI18N
+        imageAvatar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/raven/icon/icon.jpg"))); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(224, 224, 224));
@@ -98,12 +111,14 @@ public class Menu extends javax.swing.JPanel {
             roundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(roundPanel1Layout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addComponent(imageAvatar1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(imageAvatar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(10, 10, 10)
                 .addGroup(roundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(roundPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(40, 40, 40)))
+                .addGap(64, 64, 64))
         );
         roundPanel1Layout.setVerticalGroup(
             roundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -111,12 +126,13 @@ public class Menu extends javax.swing.JPanel {
                 .addGroup(roundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(roundPanel1Layout.createSequentialGroup()
                         .addGap(21, 21, 21)
-                        .addComponent(jLabel1)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2))
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(8, 8, 8))
                     .addGroup(roundPanel1Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addComponent(imageAvatar1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(imageAvatar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(10, 10, 10))
         );
 
@@ -153,8 +169,8 @@ public class Menu extends javax.swing.JPanel {
             roundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(roundPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

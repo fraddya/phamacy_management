@@ -1,14 +1,29 @@
 package com.raven.main;
 
+import com.raven.billform.Bill_Form;
+import com.raven.billform.TotalPrice;
 import com.raven.event.EventMenu;
 import com.raven.form.Form;
 import com.raven.form.Form_1;
+import com.raven.invoice.ShowInvoice;
+import com.raven.login.Rej;
+import com.raven.login.allemp;
+import com.raven.login.login;
+import com.raven.medicine.Manufacturer;
+import com.raven.medicine.Medicine;
 import java.awt.Color;
 import java.awt.Component;
+import javax.swing.BorderFactory;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
 
 public class Main extends javax.swing.JFrame {
+    
+    
 
     public Main() {
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         initComponents();
         setBackground(new Color(0, 0, 0, 0));
         EventMenu event = new EventMenu() {
@@ -17,14 +32,44 @@ public class Main extends javax.swing.JFrame {
                 if (index == 0) {
                     showForm(new Form_1());
                 } else if (index == 8) {
-                    System.out.println("Logout");
-                } else {
+                    dispose();
+                    showForm(new login());
+                } else if(index == 2){
+                    showForm(new ShowInvoice());
+                    
+                } else if(index == 1){
+                    showForm(new Bill_Form());   
+                }
+                else if(index == 6){
+                    showForm(new Rej());
+                    
+                }
+                else if(index == 5){
+                    showForm(new allemp());
+                    
+                }
+                else if(index == 3){
+                    showForm(new Medicine());
+                    
+                }
+                else if(index == 4){
+                    showForm(new Manufacturer());
+                    
+                }else {
                     showForm(new Form(index));
                 }
             }
         };
-        menu1.initMenu(event);
-        showForm(new Form_1());
+        if (TotalPrice.utype.equals("admin")) {
+            menu1.initMenu(event);
+            showForm(new Form_1());
+        } else if (TotalPrice.utype.equals("user")) {
+            menu1.initMenu(event);
+            showForm(new Bill_Form());
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Somthing Went Wrong Re Log Again");
+        }
     }
 
     private void showForm(Component com) {
@@ -42,6 +87,8 @@ public class Main extends javax.swing.JFrame {
         header2 = new com.raven.component.Header();
         menu1 = new com.raven.component.Menu();
         body = new javax.swing.JPanel();
+        roundPanel2 = new com.raven.swing.RoundPanel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -51,6 +98,26 @@ public class Main extends javax.swing.JFrame {
         body.setOpaque(false);
         body.setLayout(new java.awt.BorderLayout());
 
+        roundPanel2.setBackground(new java.awt.Color(0, 0, 0));
+
+        jLabel1.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Copyright © 2023 UNREALLABS. All rights reserved.");
+
+        javax.swing.GroupLayout roundPanel2Layout = new javax.swing.GroupLayout(roundPanel2);
+        roundPanel2.setLayout(roundPanel2Layout);
+        roundPanel2Layout.setHorizontalGroup(
+            roundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(roundPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        roundPanel2Layout.setVerticalGroup(
+            roundPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout roundPanel1Layout = new javax.swing.GroupLayout(roundPanel1);
         roundPanel1.setLayout(roundPanel1Layout);
         roundPanel1Layout.setHorizontalGroup(
@@ -58,9 +125,12 @@ public class Main extends javax.swing.JFrame {
             .addComponent(header2, javax.swing.GroupLayout.DEFAULT_SIZE, 1371, Short.MAX_VALUE)
             .addGroup(roundPanel1Layout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addComponent(menu1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(body, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(roundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(roundPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(roundPanel1Layout.createSequentialGroup()
+                        .addComponent(menu1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(body, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(10, 10, 10))
         );
         roundPanel1Layout.setVerticalGroup(
@@ -69,8 +139,10 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(header2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addGroup(roundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(menu1, javax.swing.GroupLayout.DEFAULT_SIZE, 666, Short.MAX_VALUE)
+                    .addComponent(menu1, javax.swing.GroupLayout.DEFAULT_SIZE, 631, Short.MAX_VALUE)
                     .addComponent(body, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(roundPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10))
         );
 
@@ -116,7 +188,7 @@ public class Main extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Main().setVisible(true);
+                new login().setVisible(true);
             }
         });
     }
@@ -124,7 +196,9 @@ public class Main extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel body;
     private com.raven.component.Header header2;
+    private javax.swing.JLabel jLabel1;
     private com.raven.component.Menu menu1;
     private com.raven.swing.RoundPanel roundPanel1;
+    private com.raven.swing.RoundPanel roundPanel2;
     // End of variables declaration//GEN-END:variables
 }
